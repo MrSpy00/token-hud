@@ -8,6 +8,8 @@ ne yattığını ve oturumun gerçek maliyet/kapasite durumunu gösterir.
 > (tahmin/sanılmaz). Plugin salt okunurdur; yalnızca kendi DOM'unu ekler ve
 > dispose'ta temizler.
 
+![Token HUD paneli](docs/screenshot.png)
+
 ![versiyon](https://img.shields.io/badge/version-1.0.0-blue)
 ![lisans](https://img.shields.io/badge/license-MIT-green)
 
