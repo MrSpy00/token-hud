@@ -1,0 +1,181 @@
+/* BetterGravity Token HUD — scoped styles (tbgh-* prefix) */
+
+/* ── Chip (lives inside the native titlebar toolbar) ── */
+#tbgh-chip {
+  gap: 6px;
+  app-region: no-drag;
+  transition-property: color, background-color, transform;
+  transition-duration: 0.15s, 0.15s, 0.12s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  font-variant-numeric: tabular-nums;
+  border-radius: 8px;
+}
+#tbgh-chip:active {
+  transform: scale(0.96);
+}
+#tbgh-chip .tbgh-ptext {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* Mini progress arc: track + value arc (one SVG, recolored per state) */
+#tbgh-chip .tbgh-arc-track {
+  stroke: currentColor;
+  opacity: 0.25;
+}
+#tbgh-chip .tbgh-arc {
+  stroke: currentColor;
+  opacity: 0.9;
+  transition-property: stroke-dashoffset, color;
+  transition-duration: 0.3s, 0.15s;
+  transition-timing-function: ease-out;
+}
+
+/* Usage-level colors (static cues; color never animates alone) */
+#tbgh-chip.tbgh-ok .tbgh-ptext,
+#tbgh-chip.tbgh-ok .tbgh-arc { color: #34d399; stroke: #34d399; }
+#tbgh-chip.tbgh-warn .tbgh-ptext,
+#tbgh-chip.tbgh-warn .tbgh-arc { color: #fbbf24; stroke: #fbbf24; }
+#tbgh-chip.tbgh-danger .tbgh-ptext,
+#tbgh-chip.tbgh-danger .tbgh-arc { color: #f87171; stroke: #f87171; }
+#tbgh-chip.tbgh-off .tbgh-ptext,
+#tbgh-chip.tbgh-off .tbgh-arc { color: inherit; stroke: currentColor; }
+
+/* ── Panel (fixed below the chip, everything visible at once) ── */
+#tbgh-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2147483000;
+  width: 470px;
+  background: #0c0c0e;
+  border: 1px solid #2b2b31;
+  border-radius: 12px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.25);
+  color: #e6e6e9;
+  font: 12px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: top right;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transition:
+    opacity 0.14s ease-out,
+    transform 0.14s ease-out,
+    visibility 0s linear 0.14s;
+}
+#tbgh-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.14s ease-out,
+    transform 0.14s ease-out,
+    visibility 0s;
+}
+
+.tbgh-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #232329;
+}
+
+.tbgh-title {
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: #9aa0a6;
+  text-transform: uppercase;
+}
+
+.tbgh-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font: 700 14px/1 sans-serif;
+  cursor: pointer;
+  border-radius: 6px;
+  transition-property: color, background-color;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.tbgh-close:hover {
+  color: #e6e6e9;
+  background: #1c1c21;
+}
+.tbgh-close:active {
+  transform: scale(0.96);
+}
+
+.tbgh-body {
+  padding: 8px 14px 12px;
+}
+
+.tbgh-sub {
+  padding: 2px 0 8px;
+  color: #6b7280;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Two-column dense grid — everything on one page, no scrolling */
+.tbgh-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 2px;
+}
+
+.tbgh-cell {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+  padding: 2.5px 0;
+}
+
+.tbgh-l {
+  color: #9aa0a6;
+}
+
+.tbgh-v {
+  color: #f2f2f5;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.tbgh-v.tbgh-ok { color: #34d399; }
+.tbgh-v.tbgh-warn { color: #fbbf24; }
+.tbgh-v.tbgh-danger { color: #f87171; }
+
+.tbgh-sect {
+  margin: 10px 0 2px;
+  padding-top: 8px;
+  border-top: 1px solid #232329;
+  color: #9aa0a6;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.tbgh-empty {
+  padding: 14px 0;
+  color: #6b7280;
+  text-align: center;
+}
