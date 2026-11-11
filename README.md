@@ -49,10 +49,11 @@ istemciye gönderilmediği için gösterilen değer "aktif pencere"dir.
 
 ## Kurulum
 
-1. BetterGravity plugin klasörüne klonla:
+1. BetterGravity plugin klasörüne klonla (Windows; başka platformda
+   eşdeğer dizini kullan):
 
    ```sh
-   git clone https://github.com/MrSpy00/token-hud.git "C:\Users\mrSpy\AppData\Roaming\BetterGravity\plugins\token-hud"
+   git clone https://github.com/MrSpy00/token-hud.git "%APPDATA%\BetterGravity\plugins\token-hud"
    ```
 
 2. Antigravity'yi yeniden başlat (veya plugin'leri yeniden yükle).

@@ -1,6 +1,6 @@
 {
   "name": "TokenHUD",
-  "description": "OpenCode-style token & context HUD for Antigravity: live context window usage, token breakdown, model, quota and session info. Read-only.",
+  "description": "Live token & context HUD for Antigravity (BetterGravity plugin): context window usage, token breakdown, model, quota and session info. Read-only.",
   "version": "1.0.0",
   "author": "MrSpy00 (aegisSoft)",
   "main": "index.js",
