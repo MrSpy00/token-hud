@@ -10,7 +10,7 @@ ne yattığını ve oturumun gerçek maliyet/kapasite durumunu gösterir.
 
 ![Token HUD paneli](docs/screenshot.png)
 
-![versiyon](https://img.shields.io/badge/version-1.0.0-blue)
+![versiyon](https://img.shields.io/badge/version-1.0.1-blue)
 ![lisans](https://img.shields.io/badge/license-MIT-green)
 
 ## Özellikler

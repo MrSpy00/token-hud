@@ -401,6 +401,7 @@ function ensureChip(toolbar) {
 /* ── Panel construction ──────────────────────────────────────────────────── */
 function ensurePanel() {
   if (panel && document.contains(panel)) return;
+  if (!document.body) return;
   panel = document.createElement("div");
   panel.id = `${ROOT}-panel`;
   panel.innerHTML =
@@ -433,20 +434,34 @@ function tick() {
 }
 
 /* ── Lifecycle ───────────────────────────────────────────────────────────── */
-ensurePanel();
-const stopTitlebar = plugin.dom.observe(
-  '[data-testid="pane-titlebar-toolbar"]',
-  ensureChip
-);
-// Observe may only fire on future matches — also seed the current toolbar.
-try {
-  ensureChip(document.querySelector('[data-testid="pane-titlebar-toolbar"]'));
-} catch {}
-tick();
-const timer = setInterval(tick, POLL_MS);
+// The plugin can load before <body> exists (early preload) — starting then
+// crashes on null body. Defer until the DOM is ready.
+let timer = null;
+let stopTitlebar = null;
+let started = false;
+
+function start() {
+  if (started) return;
+  started = true;
+  ensurePanel();
+  stopTitlebar = plugin.dom.observe(
+    '[data-testid="pane-titlebar-toolbar"]',
+    ensureChip
+  );
+  // Observe may only fire on future matches — also seed the current toolbar.
+  try {
+    ensureChip(document.querySelector('[data-testid="pane-titlebar-toolbar"]'));
+  } catch {}
+  tick();
+  timer = setInterval(tick, POLL_MS);
+}
+
+if (document.body) start();
+else document.addEventListener("DOMContentLoaded", start, { once: true });
 
 const cleanup = () => {
-  try { clearInterval(timer); } catch {}
+  try { document.removeEventListener("DOMContentLoaded", start); } catch {}
+  try { if (timer) clearInterval(timer); } catch {}
   try { stopTitlebar?.(); } catch {}
   try { chip?.remove(); } catch {}
   try { panel?.remove(); } catch {}
